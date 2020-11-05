@@ -3,7 +3,7 @@
     <h1>Memos</h1>
     <v-row>
       <v-col cols="12">
-        <AddMemo />  <!-- 追加 -->
+        <AddMemo />  
       </v-col>
       <v-col cols="8">
         <table>
@@ -13,10 +13,8 @@
           </tr>
           <tr v-for="memo in memos" :key="memo.id">
             <td>{{ memo.title }}</td>
-            <td>{{ memo.body }}</td>
-            <td>SHOW</td>
-            <td>EDIT</td>
-            <td>DESTROY</td>
+            <td>{{ memo.body }}</td>  <!-- 追加↓ -->
+            <td><router-link :to="{ name: 'edit-memo', params: { id: memo.id }}">EDIT</router-link></td>
           </tr>
         </table>
       </v-col>
@@ -26,12 +24,12 @@
 
 <script>
 import { mapState } from 'vuex'
-import AddMemo from './AddMemo'  //追加
+import AddMemo from './AddMemo'  
 
 export default {
-  components: {  //追加
+  components: {  
     AddMemo
-  },  //,を忘れがち！
+  },  
   computed: {
     ...mapState(['memos'])
   }

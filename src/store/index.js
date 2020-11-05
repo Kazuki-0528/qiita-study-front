@@ -15,6 +15,13 @@ export default new Vuex.Store({
     ADD_MEMO(state, memo) {
       const memos = state.memos.concat(memo)
       state.memos = memos
+    },
+    EDIT_MEMO(state, memo) {
+      state.memos.forEach(m => {
+        if (m.id === memo.id) {
+          m = memo
+        }
+      })
     }
   },
   actions: { 
@@ -27,9 +34,15 @@ export default new Vuex.Store({
     },
     async addMemo({ commit }, memo) {
       const res = await axios().post('/memos', memo)
-      const saveMemo = res.data
-      commit('ADD_MEMO', saveMemo)
-      return saveMemo
+      const savedMemo = res.data
+      commit('ADD_MEMO', savedMemo)
+      return savedMemo
+    },
+    async editMemo({ commit }, memo) {
+      const res = await axios().put(`/memos/${memo.id}`, memo)
+      const editedMemo = res.data
+      commit('EDIT_MEMO', editedMemo)
+      return editedMemo
     }
   }
 })

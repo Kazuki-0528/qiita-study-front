@@ -16,9 +16,8 @@ export default {
   },
   methods: {
     async onSubmit() {
-      await this.$store.dispatch('addMemo', this.memo)
-      this.memo.title = ''
-      this.memo.body = ''
+      const memo = await this.$store.dispatch('addMemo', this.memo) //変更
+      this.$router.push({ name: 'show-memo', params: { id: memo.id }}) //追記
     }
   }
 }
