@@ -11,6 +11,10 @@ export default new Vuex.Store({
   mutations: {
     FETCH_MEMOS(state, memos) {
       state.memos = memos
+    },
+    ADD_MEMO(state, memo) {
+      const memos = state.memos.concat(memo)
+      state.memos = memos
     }
   },
   actions: { 
@@ -20,6 +24,12 @@ export default new Vuex.Store({
           commit('FETCH_MEMOS', res.data)
         })
         .catch(error => console.log(error.res))
+    },
+    async addMemo({ commit }, memo) {
+      const res = await axios().post('/memos', memo)
+      const saveMemo = res.data
+      commit('ADD_MEMO', saveMemo)
+      return saveMemo
     }
   }
 })

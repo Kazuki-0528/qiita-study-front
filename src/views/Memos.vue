@@ -3,18 +3,7 @@
     <h1>Memos</h1>
     <v-row>
       <v-col cols="12">
-      <form>
-        <v-text-field
-          v-model="memo.title"
-          label="Title"
-        ></v-text-field>
-        <v-textarea
-          v-model="memo.body"
-          label="Body"
-        ></v-textarea>
-
-        <v-btn class="mr-4" @click="onSubmit">Create</v-btn>
-      </form>
+        <AddMemo />  <!-- 追加 -->
       </v-col>
       <v-col cols="8">
         <table>
@@ -37,19 +26,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import AddMemo from './AddMemo'  //追加
 
 export default {
+  components: {  //追加
+    AddMemo
+  },  //,を忘れがち！
   computed: {
     ...mapState(['memos'])
-  },
-  data() {
-    return {
-      memo: {}
-    }
-  },
-  methods: {
-    onSubmit() {
-    }
   }
 }
 </script> 
