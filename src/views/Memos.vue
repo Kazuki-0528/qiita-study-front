@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>Memos</h1>
+    <h1 class="herder"><img class="cat" src="../assets/catblue.gif" />Memos</h1>
     <v-row>
       <v-col cols="12">
-        <AddMemo />  
+        <AddMemo />
       </v-col>
       <v-col cols="8">
         <table>
@@ -13,8 +13,10 @@
           </tr>
           <tr v-for="memo in memos" :key="memo.id">
             <td>{{ memo.title }}</td>
-            <td>{{ memo.body }}</td>  <!-- 追加↓ -->
-            <td><router-link :to="{ name: 'edit-memo', params: { id: memo.id }}">EDIT</router-link></td>
+            <td>{{ memo.body }}</td>
+            <td>
+              <span class="delete-btn" @click="deleteMemo(memo)">[ DELETE ]</span> <!-- 追加 -->
+            </td>
           </tr>
         </table>
       </v-col>
@@ -23,15 +25,33 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import AddMemo from './AddMemo'  
+import { mapState } from "vuex";
+import AddMemo from "./AddMemo";
 
 export default {
-  components: {  
-    AddMemo
-  },  
+  components: {
+    AddMemo,
+  },
   computed: {
-    ...mapState(['memos'])
+    ...mapState(["memos"]),
+  },
+  methods: {
+    deleteMemo(memo) {
+      this.$store.dispatch('deleteMemo', memo)
+    }
+  }
+};
+</script>
+
+<style lang="scss">  //追加
+.delete-btn {
+  &:hover {
+    border: 2px solid blue;
+    color: rgb(5, 6, 6);
   }
 }
-</script> 
+
+.cat {
+  padding-right: 8px;
+}
+</style>
