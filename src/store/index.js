@@ -6,7 +6,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    memos: []
+    memos: [],
+    flash_message: {
+      status: false,
+      message: ''
+    }
   },
   mutations: {
     FETCH_MEMOS(state, memos) {
@@ -19,6 +23,9 @@ export default new Vuex.Store({
     DELETE_MEMO(state, memoId) {
       const memos = state.memos.filter(m => m.id != memoId)
       state.memos = memos
+    },
+    setMessage(state, payload) {
+      state.flash_message = payload
     }
   },
   actions: { 
@@ -35,7 +42,7 @@ export default new Vuex.Store({
       commit('ADD_MEMO', savedMemo)
       return savedMemo
     },
-    async deleteMemo({ commit }, memo) { // 追加
+    async deleteMemo({ commit }, memo) { 
       await axios().delete(`/memos/${memo.id}`, memo)
       commit('DELETE_MEMO', memo.id)
     }

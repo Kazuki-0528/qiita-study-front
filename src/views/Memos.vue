@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div>  
+    <Flash />
     <h1 class="herder"><img class="cat" src="../assets/catblue.gif" />Memos</h1>
     <v-row>
       <v-col cols="12">
@@ -27,10 +28,12 @@
 <script>
 import { mapState } from "vuex";
 import AddMemo from "./AddMemo";
+import Flash from '@/components/Flash.vue'
 
 export default {
   components: {
     AddMemo,
+    Flash
   },
   computed: {
     ...mapState(["memos"]),
@@ -38,12 +41,19 @@ export default {
   methods: {
     deleteMemo(memo) {
       this.$store.dispatch('deleteMemo', memo)
+      this.$store.commit('setMessage', {
+        status: true,
+        message: 'DOPE.'
+      })
+      setTimeout(() => {
+        this.$store.commit('setMessage', {})
+      }, 2000)
     }
   }
 };
 </script>
 
-<style lang="scss">  //追加
+<style lang="scss">  
 .delete-btn {
   &:hover {
     border: 2px solid blue;
@@ -51,7 +61,7 @@ export default {
   }
 }
 
-.cat {
+.cat {  //追加
   padding-right: 8px;
 }
 </style>
