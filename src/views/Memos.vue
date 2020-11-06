@@ -43,7 +43,7 @@ export default {
       this.$store.dispatch('deleteMemo', memo)
       this.$store.commit('setMessage', {
         status: true,
-        message: 'DOPE.'
+        message: 'Meeoooooow'
       })
       setTimeout(() => {
         this.$store.commit('setMessage', {})
