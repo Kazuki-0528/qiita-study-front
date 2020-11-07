@@ -1,7 +1,10 @@
 <template>
   <div>  
     <Flash />
-    <h1 class="herder"><img class="cat" src="../assets/catblue.gif" />Memos</h1>
+    <h1 class="herder">
+      <img src="../assets/catblue.gif">
+      Memos
+    </h1>
     <v-row>
       <v-col cols="12">
         <AddMemo />
@@ -61,7 +64,7 @@ export default {
   }
 }
 
-.cat {  //追加
+img {  //追加
   padding-right: 8px;
 }
 </style>
